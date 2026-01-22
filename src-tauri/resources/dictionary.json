@@ -1,0 +1,760 @@
+{
+    "words": [
+        {
+            "word": "algorithm",
+            "definition": "A step-by-step procedure for solving a problem or accomplishing a task, especially by a computer."
+        },
+        {
+            "word": "allocate",
+            "definition": "To distribute or assign resources, memory, or tasks for a specific purpose."
+        },
+        {
+            "word": "allocation",
+            "definition": "The process of reserving a block of memory for data."
+        },
+        {
+            "word": "analyze",
+            "definition": "To examine something in detail to understand it better or draw conclusions."
+        },
+        {
+            "word": "annotation",
+            "definition": "A note or comment added to a text or diagram to explain or clarify."
+        },
+        {
+            "word": "API",
+            "definition": "Application Programming Interface; a set of protocols and tools for building software applications."
+        },
+        {
+            "word": "application",
+            "definition": "A software program designed to perform a specific function for the user."
+        },
+        {
+            "word": "argument",
+            "definition": "A value passed to a function or program when it is called."
+        },
+        {
+            "word": "array",
+            "definition": "A data structure containing a collection of elements, each identified by an index."
+        },
+        {
+            "word": "asynchronous",
+            "definition": "Not occurring at the same time; in computing, operations that occur independently of the main program flow."
+        },
+        {
+            "word": "authentication",
+            "definition": "The process of verifying the identity of a user or system."
+        },
+        {
+            "word": "authorization",
+            "definition": "The process of granting or denying access to resources based on permissions."
+        },
+        {
+            "word": "backend",
+            "definition": "The server-side part of an application that handles data processing and storage."
+        },
+        {
+            "word": "bandwidth",
+            "definition": "The maximum rate of data transfer across a network path."
+        },
+        {
+            "word": "bank",
+            "definition": "An institution for receiving, lending, exchanging, and safeguarding money; also, the land beside a body of water."
+        },
+        {
+            "word": "binary",
+            "definition": "A number system using only 0 and 1; also, compiled code that can be executed directly by a computer."
+        },
+        {
+            "word": "boolean",
+            "definition": "A data type with only two possible values: true or false."
+        },
+        {
+            "word": "buffer",
+            "definition": "A temporary storage area for data being transferred between two locations."
+        },
+        {
+            "word": "bug",
+            "definition": "An error or flaw in software that causes incorrect or unexpected behavior."
+        },
+        {
+            "word": "bytecode",
+            "definition": "A form of instruction set designed for efficient execution by a software interpreter."
+        },
+        {
+            "word": "cache",
+            "definition": "A hardware or software component that stores data for faster future access."
+        },
+        {
+            "word": "callback",
+            "definition": "A function passed as an argument to another function, to be executed later."
+        },
+        {
+            "word": "class",
+            "definition": "A blueprint for creating objects in object-oriented programming, defining properties and methods."
+        },
+        {
+            "word": "client",
+            "definition": "A computer or software that requests services from a server."
+        },
+        {
+            "word": "cloud",
+            "definition": "Remote servers accessed over the internet for storing, managing, and processing data."
+        },
+        {
+            "word": "code",
+            "definition": "Instructions written in a programming language that a computer can execute."
+        },
+        {
+            "word": "compile",
+            "definition": "To convert source code into machine code or bytecode."
+        },
+        {
+            "word": "compiler",
+            "definition": "A program that translates source code into machine code or bytecode."
+        },
+        {
+            "word": "component",
+            "definition": "A modular, reusable piece of software that performs a specific function."
+        },
+        {
+            "word": "compress",
+            "definition": "To reduce the size of data using encoding algorithms."
+        },
+        {
+            "word": "concurrency",
+            "definition": "The ability of a system to handle multiple tasks simultaneously."
+        },
+        {
+            "word": "configuration",
+            "definition": "Settings that define how software or hardware operates."
+        },
+        {
+            "word": "constant",
+            "definition": "A value that cannot be changed during program execution."
+        },
+        {
+            "word": "container",
+            "definition": "A lightweight, standalone package that includes everything needed to run software."
+        },
+        {
+            "word": "CPU",
+            "definition": "Central Processing Unit; the primary component that executes instructions in a computer."
+        },
+        {
+            "word": "database",
+            "definition": "An organized collection of structured data stored electronically."
+        },
+        {
+            "word": "debug",
+            "definition": "To find and fix errors in software."
+        },
+        {
+            "word": "decrypt",
+            "definition": "To convert encrypted data back to its original form."
+        },
+        {
+            "word": "default",
+            "definition": "A preset value or behavior used when no alternative is specified."
+        },
+        {
+            "word": "dependency",
+            "definition": "A software component that another component relies on to function."
+        },
+        {
+            "word": "deploy",
+            "definition": "To release and install software for use in a production environment."
+        },
+        {
+            "word": "deprecated",
+            "definition": "A feature or practice that is no longer recommended and may be removed in future versions."
+        },
+        {
+            "word": "deterministic",
+            "definition": "A process that, given a particular input, will always produce the same output."
+        },
+        {
+            "word": "developer",
+            "definition": "A person who writes and maintains software code."
+        },
+        {
+            "word": "directory",
+            "definition": "A file system structure that contains files and other directories."
+        },
+        {
+            "word": "dynamic",
+            "definition": "Characterized by constant change; in computing, referring to processes that occur during execution."
+        },
+        {
+            "word": "element",
+            "definition": "An individual item in a data structure such as an array or list."
+        },
+        {
+            "word": "embed",
+            "definition": "To include one thing within another, such as code within a document."
+        },
+        {
+            "word": "encrypt",
+            "definition": "To convert data into a coded format to prevent unauthorized access."
+        },
+        {
+            "word": "endpoint",
+            "definition": "A URL where an API can be accessed by a client application."
+        },
+        {
+            "word": "environment",
+            "definition": "The context in which software runs, including operating system and configuration."
+        },
+        {
+            "word": "error",
+            "definition": "A mistake or problem in software that prevents correct operation."
+        },
+        {
+            "word": "event",
+            "definition": "An action or occurrence detected by a program that may trigger a response."
+        },
+        {
+            "word": "exception",
+            "definition": "An error condition that disrupts the normal flow of program execution."
+        },
+        {
+            "word": "execute",
+            "definition": "To run or carry out instructions in a program."
+        },
+        {
+            "word": "expression",
+            "definition": "A combination of values, variables, and operators that evaluates to a result."
+        },
+        {
+            "word": "extension",
+            "definition": "An add-on that extends the functionality of software."
+        },
+        {
+            "word": "file",
+            "definition": "A container for storing data on a computer."
+        },
+        {
+            "word": "filter",
+            "definition": "To select items from a collection based on specific criteria."
+        },
+        {
+            "word": "firewall",
+            "definition": "A security system that monitors and controls network traffic."
+        },
+        {
+            "word": "float",
+            "definition": "A data type representing numbers with decimal points."
+        },
+        {
+            "word": "framework",
+            "definition": "A platform providing a foundation for developing software applications."
+        },
+        {
+            "word": "frontend",
+            "definition": "The client-side part of an application that users interact with directly."
+        },
+        {
+            "word": "function",
+            "definition": "A reusable block of code that performs a specific task."
+        },
+        {
+            "word": "garbage collection",
+            "definition": "Automatic memory management that reclaims space used by objects no longer in use."
+        },
+        {
+            "word": "git",
+            "definition": "A distributed version control system for tracking changes in source code."
+        },
+        {
+            "word": "global",
+            "definition": "Accessible from anywhere in a program; having worldwide scope."
+        },
+        {
+            "word": "GPU",
+            "definition": "Graphics Processing Unit; a processor optimized for rendering graphics and parallel computing."
+        },
+        {
+            "word": "hash",
+            "definition": "A fixed-size value generated from input data using a mathematical function."
+        },
+        {
+            "word": "header",
+            "definition": "Metadata at the beginning of a file or network packet."
+        },
+        {
+            "word": "heap",
+            "definition": "A region of memory used for dynamic allocation."
+        },
+        {
+            "word": "heuristic",
+            "definition": "A technique designed for solving a problem more quickly when classic methods are too slow."
+        },
+        {
+            "word": "HTTP",
+            "definition": "Hypertext Transfer Protocol; the foundation of data communication on the web."
+        },
+        {
+            "word": "IDE",
+            "definition": "Integrated Development Environment; software that combines tools for coding, debugging, and testing."
+        },
+        {
+            "word": "immutable",
+            "definition": "Unable to be changed after creation."
+        },
+        {
+            "word": "implement",
+            "definition": "To put a design or plan into effect; to write code that fulfills a specification."
+        },
+        {
+            "word": "import",
+            "definition": "To bring external code or data into a program."
+        },
+        {
+            "word": "index",
+            "definition": "A numerical position in an array or other data structure; a database structure for fast lookups."
+        },
+        {
+            "word": "initialize",
+            "definition": "To set up initial values and prepare for use."
+        },
+        {
+            "word": "input",
+            "definition": "Data provided to a program or function."
+        },
+        {
+            "word": "instance",
+            "definition": "A specific occurrence of an object created from a class."
+        },
+        {
+            "word": "integer",
+            "definition": "A whole number without a decimal point."
+        },
+        {
+            "word": "interface",
+            "definition": "A shared boundary across which components exchange information; a contract defining methods."
+        },
+        {
+            "word": "interpreter",
+            "definition": "A program that executes instructions directly without prior compilation."
+        },
+        {
+            "word": "iterate",
+            "definition": "To repeat a process, typically over elements in a collection."
+        },
+        {
+            "word": "JSON",
+            "definition": "JavaScript Object Notation; a lightweight data interchange format."
+        },
+        {
+            "word": "just-in-time",
+            "definition": "A method of executing computer code that involves compilation during execution rather than prior to execution."
+        },
+        {
+            "word": "kernel",
+            "definition": "The core component of an operating system that manages system resources."
+        },
+        {
+            "word": "key",
+            "definition": "An identifier used to access values in a data structure; a cryptographic secret."
+        },
+        {
+            "word": "keyword",
+            "definition": "A reserved word in a programming language with special meaning."
+        },
+        {
+            "word": "latency",
+            "definition": "The time interval between a cause and its effect in a system."
+        },
+        {
+            "word": "library",
+            "definition": "A collection of pre-written code that can be reused in programs."
+        },
+        {
+            "word": "link",
+            "definition": "A connection between elements; to combine object files into an executable."
+        },
+        {
+            "word": "list",
+            "definition": "An ordered collection of elements."
+        },
+        {
+            "word": "load",
+            "definition": "To transfer data or programs into memory."
+        },
+        {
+            "word": "local",
+            "definition": "Accessible only within a limited scope; stored on the current device."
+        },
+        {
+            "word": "log",
+            "definition": "A record of events or messages generated by software."
+        },
+        {
+            "word": "logic",
+            "definition": "The reasoning and decision-making processes in a program."
+        },
+        {
+            "word": "loop",
+            "definition": "A programming construct that repeats a block of code."
+        },
+        {
+            "word": "machine learning",
+            "definition": "A branch of AI where systems learn from data to improve performance."
+        },
+        {
+            "word": "memory",
+            "definition": "Hardware or storage used to hold data and instructions for processing."
+        },
+        {
+            "word": "merge",
+            "definition": "To combine two or more items into one."
+        },
+        {
+            "word": "metadata",
+            "definition": "Data that describes other data."
+        },
+        {
+            "word": "method",
+            "definition": "A function associated with an object or class."
+        },
+        {
+            "word": "middleware",
+            "definition": "Software that connects different applications or components."
+        },
+        {
+            "word": "module",
+            "definition": "A self-contained unit of code that can be imported and used."
+        },
+        {
+            "word": "mutable",
+            "definition": "Able to be changed after creation."
+        },
+        {
+            "word": "namespace",
+            "definition": "A container that holds identifiers to avoid naming conflicts."
+        },
+        {
+            "word": "native",
+            "definition": "Specific to a particular platform or environment."
+        },
+        {
+            "word": "network",
+            "definition": "A group of interconnected computers and devices."
+        },
+        {
+            "word": "node",
+            "definition": "A point in a network or data structure."
+        },
+        {
+            "word": "null",
+            "definition": "A special value representing the absence of a value."
+        },
+        {
+            "word": "object",
+            "definition": "An instance of a class containing data and methods."
+        },
+        {
+            "word": "optimize",
+            "definition": "To make as effective or efficient as possible."
+        },
+        {
+            "word": "optimization",
+            "definition": "The action of making the best or most effective use of a resource."
+        },
+        {
+            "word": "output",
+            "definition": "Data produced by a program or function."
+        },
+        {
+            "word": "override",
+            "definition": "To replace inherited behavior with new implementation."
+        },
+        {
+            "word": "package",
+            "definition": "A bundle of related code or software."
+        },
+        {
+            "word": "parameter",
+            "definition": "A variable in a function definition that receives arguments."
+        },
+        {
+            "word": "parse",
+            "definition": "To analyze and interpret structured data."
+        },
+        {
+            "word": "path",
+            "definition": "The location of a file or directory in a file system."
+        },
+        {
+            "word": "performance",
+            "definition": "How well a system executes its functions."
+        },
+        {
+            "word": "permission",
+            "definition": "Authorization to access or modify resources."
+        },
+        {
+            "word": "pixel",
+            "definition": "The smallest unit of a digital image."
+        },
+        {
+            "word": "platform",
+            "definition": "The hardware and software environment where applications run."
+        },
+        {
+            "word": "plugin",
+            "definition": "Software that adds features to an existing application."
+        },
+        {
+            "word": "pointer",
+            "definition": "A variable that stores the memory address of another value."
+        },
+        {
+            "word": "port",
+            "definition": "A communication endpoint; to adapt software for different platforms."
+        },
+        {
+            "word": "process",
+            "definition": "A running instance of a program."
+        },
+        {
+            "word": "production",
+            "definition": "The live environment where software is used by end users."
+        },
+        {
+            "word": "programming",
+            "definition": "The process of creating software using programming languages."
+        },
+        {
+            "word": "protocol",
+            "definition": "A set of rules governing data communication."
+        },
+        {
+            "word": "query",
+            "definition": "A request for data from a database."
+        },
+        {
+            "word": "queue",
+            "definition": "A data structure where elements are processed in order of arrival."
+        },
+        {
+            "word": "RAM",
+            "definition": "Random Access Memory; volatile memory for temporary data storage."
+        },
+        {
+            "word": "recursion",
+            "definition": "A technique where a function calls itself."
+        },
+        {
+            "word": "refactor",
+            "definition": "To restructure code without changing its external behavior."
+        },
+        {
+            "word": "reference",
+            "definition": "A value that points to data stored elsewhere."
+        },
+        {
+            "word": "regex",
+            "definition": "Regular Expression; a pattern for matching text."
+        },
+        {
+            "word": "render",
+            "definition": "To generate a visual output from data or code."
+        },
+        {
+            "word": "repository",
+            "definition": "A storage location for code and version history."
+        },
+        {
+            "word": "request",
+            "definition": "A message sent to a server asking for a response."
+        },
+        {
+            "word": "response",
+            "definition": "Data sent back from a server in reply to a request."
+        },
+        {
+            "word": "runtime",
+            "definition": "The period when a program is executing; the environment that runs code."
+        },
+        {
+            "word": "scale",
+            "definition": "To adjust size or capacity to handle varying loads."
+        },
+        {
+            "word": "schema",
+            "definition": "The structure or organization of a database or data format."
+        },
+        {
+            "word": "scope",
+            "definition": "The region of code where a variable is accessible."
+        },
+        {
+            "word": "script",
+            "definition": "A program written in a scripting language."
+        },
+        {
+            "word": "SDK",
+            "definition": "Software Development Kit; tools for building applications for a platform."
+        },
+        {
+            "word": "server",
+            "definition": "A computer or software that provides services to clients."
+        },
+        {
+            "word": "session",
+            "definition": "A period of interaction between a user and a system."
+        },
+        {
+            "word": "software",
+            "definition": "Programs and operating information used by a computer."
+        },
+        {
+            "word": "source",
+            "definition": "The origin of data or the original code of a program."
+        },
+        {
+            "word": "specialization",
+            "definition": "The process of tailoring code for specific types or values to improve performance."
+        },
+        {
+            "word": "stack",
+            "definition": "A data structure with last-in-first-out access; the set of technologies used."
+        },
+        {
+            "word": "state",
+            "definition": "The current condition or values in a system at a point in time."
+        },
+        {
+            "word": "statement",
+            "definition": "A single instruction in a programming language."
+        },
+        {
+            "word": "static",
+            "definition": "Fixed at compile time; belonging to a class rather than an instance."
+        },
+        {
+            "word": "storage",
+            "definition": "Hardware or services for saving data persistently."
+        },
+        {
+            "word": "string",
+            "definition": "A sequence of characters representing text."
+        },
+        {
+            "word": "struct",
+            "definition": "A data type that groups related variables."
+        },
+        {
+            "word": "syntax",
+            "definition": "The rules governing the structure of statements in a language."
+        },
+        {
+            "word": "system",
+            "definition": "A collection of components working together."
+        },
+        {
+            "word": "template",
+            "definition": "A predefined structure used as a starting point."
+        },
+        {
+            "word": "terminal",
+            "definition": "A text-based interface for interacting with a computer."
+        },
+        {
+            "word": "test",
+            "definition": "To verify that software works as expected."
+        },
+        {
+            "word": "thread",
+            "definition": "A sequence of instructions that can run concurrently with others."
+        },
+        {
+            "word": "throughput",
+            "definition": "The amount of data or processes handled within a specific period."
+        },
+        {
+            "word": "token",
+            "definition": "A unit of data representing authentication or lexical element."
+        },
+        {
+            "word": "trace-based",
+            "definition": "A method of optimization that uses execution traces to identify hot code paths."
+        },
+        {
+            "word": "type",
+            "definition": "A category for a piece of data that determines what operations can be performed on it."
+        },
+        {
+            "word": "UI",
+            "definition": "User Interface; the visual elements users interact with."
+        },
+        {
+            "word": "update",
+            "definition": "To modify data or software to a newer version."
+        },
+        {
+            "word": "upload",
+            "definition": "To transfer data from a local system to a remote server."
+        },
+        {
+            "word": "URL",
+            "definition": "Uniform Resource Locator; the address of a resource on the internet."
+        },
+        {
+            "word": "user",
+            "definition": "A person who operates or interacts with a system."
+        },
+        {
+            "word": "utility",
+            "definition": "A program that performs a specific useful task."
+        },
+        {
+            "word": "UX",
+            "definition": "User Experience; the overall experience of using a product."
+        },
+        {
+            "word": "validate",
+            "definition": "To check that data meets required standards or formats."
+        },
+        {
+            "word": "value",
+            "definition": "Data stored in a variable or returned by an expression."
+        },
+        {
+            "word": "variable",
+            "definition": "A named storage location for data in a program."
+        },
+        {
+            "word": "version",
+            "definition": "A specific release or iteration of software."
+        },
+        {
+            "word": "virtual",
+            "definition": "Simulated by software rather than existing physically."
+        },
+        {
+            "word": "virtual machine",
+            "definition": "An emulation of a computer system providing the functionality of a physical computer."
+        },
+        {
+            "word": "void",
+            "definition": "A type indicating the absence of a value."
+        },
+        {
+            "word": "web",
+            "definition": "The World Wide Web; a system of interlinked hypertext documents."
+        },
+        {
+            "word": "widget",
+            "definition": "A small application or component in a user interface."
+        },
+        {
+            "word": "XML",
+            "definition": "Extensible Markup Language; a format for structuring data."
+        },
+        {
+            "word": "yield",
+            "definition": "To produce a value from a generator function."
+        }
+    ]
+}

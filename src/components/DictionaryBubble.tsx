@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Book, Sparkles, Copy, MessageSquare } from 'lucide-react';
-import { invoke } from '@tauri-apps/api/core';
 
 interface DictionaryBubbleProps {
     word: string;
@@ -10,20 +9,82 @@ interface DictionaryBubbleProps {
     onDeepDive: (word: string) => void;
 }
 
+// Check if we're running in Tauri desktop environment
+const isTauri = () => !!(window as any).__TAURI__;
+
+// Online dictionary API fallback (Free Dictionary API)
+async function fetchOnlineDefinition(term: string): Promise<string[]> {
+    try {
+        const cleanTerm = term.trim().replace(/[.,!?;:()"]/g, '').toLowerCase();
+        if (cleanTerm.length < 2 || cleanTerm.split(/\s+/).length > 3) return [];
+
+        const response = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${encodeURIComponent(cleanTerm)}`);
+        if (!response.ok) return [];
+
+        const data = await response.json();
+        const defs: string[] = [];
+
+        if (Array.isArray(data)) {
+            data.forEach((entry: any) => {
+                entry.meanings?.forEach((meaning: any) => {
+                    meaning.definitions?.slice(0, 2).forEach((def: any) => {
+                        if (def.definition) {
+                            defs.push(`(${meaning.partOfSpeech || 'noun'}) ${def.definition}`);
+                        }
+                    });
+                });
+            });
+        }
+        return defs.slice(0, 3);
+    } catch {
+        return [];
+    }
+}
+
 export const DictionaryBubble: React.FC<DictionaryBubbleProps> = ({ word, position, onClose, onDeepDive }) => {
     const [definitions, setDefinitions] = useState<string[]>([]);
     const [loading, setLoading] = useState(true);
+    const [source, setSource] = useState<'local' | 'online' | null>(null);
 
     useEffect(() => {
         const fetchDefinition = async () => {
-            try {
-                const results: string[] = await invoke('search_dictionary', { word });
-                setDefinitions(results);
-            } catch (err) {
-                console.error('Dictionary search failed:', err);
-            } finally {
-                setLoading(false);
+            setLoading(true);
+            setDefinitions([]);
+            setSource(null);
+
+            let foundLocal = false;
+
+            // Try Tauri offline dictionary first (only in desktop app)
+            if (isTauri()) {
+                try {
+                    const { invoke } = await import('@tauri-apps/api/core');
+                    if (typeof invoke === 'function') {
+                        const results: string[] = await invoke('search_dictionary', { word: word.trim() });
+                        if (results && results.length > 0) {
+                            setDefinitions(results);
+                            setSource('local');
+                            foundLocal = true;
+                        }
+                    }
+                } catch (err) {
+                    console.warn('Tauri dictionary lookup failed, falling back to online:', err);
+                }
             }
+
+            // Fallback to online dictionary API if no local result
+            if (!foundLocal) {
+                try {
+                    const onlineResults = await fetchOnlineDefinition(word);
+                    if (onlineResults.length > 0) {
+                        setDefinitions(onlineResults);
+                        setSource('online');
+                    }
+                } catch (err) {
+                    console.warn('Online dictionary lookup failed:', err);
+                }
+            }
+
+            setLoading(false);
         };
 
         if (word) fetchDefinition();
@@ -38,6 +99,7 @@ export const DictionaryBubble: React.FC<DictionaryBubbleProps> = ({ word, positi
 
         const handleClickOutside = (e: MouseEvent) => {
             const target = e.target as HTMLElement;
+            // Don't close if clicking inside the bubble
             if (!target.closest('.glass')) {
                 onClose();
             }
@@ -49,13 +111,19 @@ export const DictionaryBubble: React.FC<DictionaryBubbleProps> = ({ word, positi
             }
         };
 
+        // Add a small delay before registering click listener to prevent 
+        // the double-click that triggered the bubble from immediately closing it
+        const timeoutId = setTimeout(() => {
+            document.addEventListener('mousedown', handleClickOutside);
+        }, 150);
+
         document.addEventListener('contextmenu', handleContextMenu);
-        document.addEventListener('click', handleClickOutside);
         document.addEventListener('keydown', handleEscape);
 
         return () => {
+            clearTimeout(timeoutId);
             document.removeEventListener('contextmenu', handleContextMenu);
-            document.removeEventListener('click', handleClickOutside);
+            document.removeEventListener('mousedown', handleClickOutside);
             document.removeEventListener('keydown', handleEscape);
         };
     }, [onClose]);
@@ -85,7 +153,19 @@ export const DictionaryBubble: React.FC<DictionaryBubbleProps> = ({ word, positi
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 12 }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 6, fontSize: 14, fontWeight: 700 }}>
                     <Book size={14} color="var(--accent-color)" />
-                    <span>{word}</span>
+                    <span>{word.length > 25 ? word.substring(0, 22) + '...' : word}</span>
+                    {source && (
+                        <span style={{
+                            fontSize: 9,
+                            padding: '2px 5px',
+                            borderRadius: 4,
+                            background: source === 'local' ? 'var(--accent-color)' : 'var(--glass-border)',
+                            color: source === 'local' ? 'white' : 'var(--text-primary)',
+                            opacity: 0.8
+                        }}>
+                            {source === 'local' ? 'OFFLINE' : 'ONLINE'}
+                        </span>
+                    )}
                 </div>
                 <div style={{ display: 'flex', gap: 8 }}>
                     <Copy size={12} className="icon-btn" onClick={() => navigator.clipboard.writeText(word)} />
@@ -94,7 +174,7 @@ export const DictionaryBubble: React.FC<DictionaryBubbleProps> = ({ word, positi
 
             <div style={{ maxHeight: 120, overflowY: 'auto', marginBottom: 16 }}>
                 {loading ? (
-                    <div style={{ fontSize: 12, opacity: 0.5 }}>Searching local dictionary...</div>
+                    <div style={{ fontSize: 12, opacity: 0.5 }}>Searching dictionary...</div>
                 ) : definitions.length > 0 ? (
                     definitions.map((def, i) => (
                         <div key={i} style={{ fontSize: 13, lineHeight: 1.5, marginBottom: 8, paddingLeft: 8, borderLeft: '2px solid var(--glass-border)' }}>
@@ -102,7 +182,7 @@ export const DictionaryBubble: React.FC<DictionaryBubbleProps> = ({ word, positi
                         </div>
                     ))
                 ) : (
-                    <div style={{ fontSize: 12, opacity: 0.5 }}>No local definition found.</div>
+                    <div style={{ fontSize: 12, opacity: 0.5 }}>No definition found. Try AI Deep Dive.</div>
                 )}
             </div>
 

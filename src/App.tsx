@@ -119,6 +119,16 @@ function App() {
     }
   }, [isEditMode]);
 
+  const handleScroll = useCallback(() => {
+    setSelection(prev => {
+      if (prev) {
+        window.getSelection()?.removeAllRanges();
+        return null; // Clear selection
+      }
+      return prev;
+    });
+  }, []);
+
   const activeTab = tabs.find(t => t.id === activeTabId);
 
   return (
@@ -218,6 +228,7 @@ function App() {
                   tabId={activeTab.id}
                   path={activeTab.path}
                   onSelection={handleSelection}
+                  onScroll={handleScroll}
                 />
               </motion.div>
             ) : (
@@ -243,6 +254,7 @@ function App() {
           </AnimatePresence>
 
           {/* Floating Bubble */}
+
           <AnimatePresence>
             {!isEditMode && selection && (
               <DictionaryBubble

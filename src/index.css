@@ -183,14 +183,12 @@ body {
   border-radius: 4px;
 }
 
-/* PDF.js Text Layer */
+/* PDF.js Text Layer - Precise Alignment */
 .textLayer {
   position: absolute;
+  display: inline-block;
+  /* Ensures proper sizing */
   text-align: initial;
-  left: 0;
-  top: 0;
-  right: 0;
-  bottom: 0;
   overflow: hidden;
   opacity: 1;
   line-height: 1;
@@ -199,8 +197,14 @@ body {
   text-size-adjust: none;
   forced-color-adjust: none;
   transform-origin: 0 0;
+  /* Critical for alignment */
   z-index: 2;
   pointer-events: none;
+  margin: 0;
+  padding: 0;
+  left: 0 !important;
+  top: 0 !important;
+  /* Inline styles will set: width, height */
 }
 
 .textLayer span {
@@ -210,9 +214,28 @@ body {
   cursor: text;
   transform-origin: 0% 0%;
   pointer-events: auto;
+  /* Do NOT override font-family - PDF.js uses font metrics for alignment */
+  margin: 0;
+  padding: 0;
 }
 
-/* Edit Mode Visuals */
+/* Professional Selection Highlighting */
+.textLayer ::selection {
+  background: rgba(66, 135, 245, 0.3);
+  color: transparent;
+}
+
+.textLayer span::selection {
+  background: rgba(66, 135, 245, 0.3);
+  color: transparent;
+}
+
+/* Smooth highlight edges (no blocky appearance) */
+.textLayer span {
+  user-select: text;
+  -webkit-user-select: text;
+}
+
 .edit-active .textLayer span {
   transition: background 0.2s;
 }

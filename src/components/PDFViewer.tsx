@@ -11,9 +11,10 @@ interface PDFViewerProps {
     tabId: string;
     path: string;
     onSelection: (text: string, position: { x: number, y: number }) => void;
+    onScroll?: () => void; // Callback for scroll events (auto-hide bubble)
 }
 
-export const PDFViewer: React.FC<PDFViewerProps> = ({ tabId, path, onSelection }) => {
+export const PDFViewer: React.FC<PDFViewerProps> = ({ tabId, path, onSelection, onScroll }) => {
     const containerRef = useRef<HTMLDivElement>(null);
     const { isEditMode, isDarkMode, updateTab, saveEdit, tabs } = useTabStore();
     const currentTab = tabs.find(t => t.id === tabId);
@@ -24,6 +25,23 @@ export const PDFViewer: React.FC<PDFViewerProps> = ({ tabId, path, onSelection }
     useEffect(() => {
         currentTabRef.current = currentTab;
     }, [currentTab]);
+
+    // Handle scroll to hide bubble
+    useEffect(() => {
+        const container = containerRef.current;
+        if (!container) return;
+
+        const handleScroll = () => {
+            if (onScroll) {
+                onScroll();
+            }
+        };
+
+        container.addEventListener('scroll', handleScroll, { passive: true });
+        return () => {
+            container.removeEventListener('scroll', handleScroll);
+        };
+    }, [onScroll]);
 
     useEffect(() => {
         let active = true;
@@ -56,11 +74,13 @@ export const PDFViewer: React.FC<PDFViewerProps> = ({ tabId, path, onSelection }
 
         const renderPage = async (pdf: any, pageNum: number) => {
             const page = await pdf.getPage(pageNum);
+            const scale = 1.5;
+            const viewport = page.getViewport({ scale });
             const outputScale = window.devicePixelRatio || 1;
-            const viewport = page.getViewport({ scale: 1.5 });
 
             const pageContainer = document.createElement('div');
             pageContainer.className = `page-container ${isEditMode ? 'edit-mode' : ''}`;
+            pageContainer.style.position = 'relative';
             pageContainer.style.width = `${viewport.width}px`;
             pageContainer.style.height = `${viewport.height}px`;
 
@@ -84,7 +104,6 @@ export const PDFViewer: React.FC<PDFViewerProps> = ({ tabId, path, onSelection }
             canvas.height = Math.floor(viewport.height * outputScale);
             canvas.style.width = `${viewport.width}px`;
             canvas.style.height = `${viewport.height}px`;
-
             canvas.style.display = 'block';
             canvas.style.background = 'white';
 
@@ -92,18 +111,28 @@ export const PDFViewer: React.FC<PDFViewerProps> = ({ tabId, path, onSelection }
             context.fillStyle = 'white';
             context.fillRect(0, 0, viewport.width, viewport.height);
 
-            pageContainer.appendChild(canvas);
+            // Create wrapper for canvas + text layer to share same coordinate system
+            const canvasWrapper = document.createElement('div');
+            canvasWrapper.style.position = 'relative';
+            canvasWrapper.style.width = `${viewport.width}px`;
+            canvasWrapper.style.height = `${viewport.height}px`;
+            canvasWrapper.style.margin = '0'; // No margin to prevent offset
+            canvasWrapper.style.padding = '0';
+
+            canvasWrapper.appendChild(canvas);
 
             const textLayerDiv = document.createElement('div');
             textLayerDiv.className = 'textLayer';
             textLayerDiv.style.position = 'absolute';
             textLayerDiv.style.left = '0';
             textLayerDiv.style.top = '0';
-            textLayerDiv.style.zIndex = '2';
-            textLayerDiv.style.width = '100%';
-            textLayerDiv.style.height = '100%';
+            textLayerDiv.style.width = `${viewport.width}px`;
+            textLayerDiv.style.height = `${viewport.height}px`;
+            textLayerDiv.style.overflow = 'hidden';
+            textLayerDiv.style.lineHeight = '1.0';
 
-            pageContainer.appendChild(textLayerDiv);
+            canvasWrapper.appendChild(textLayerDiv);
+            pageContainer.appendChild(canvasWrapper);
             containerRef.current?.appendChild(pageContainer);
 
             const renderContext = {
@@ -117,14 +146,26 @@ export const PDFViewer: React.FC<PDFViewerProps> = ({ tabId, path, onSelection }
             try {
                 // @ts-ignore
                 if (pdfjs.TextLayer) {
-                    // @ts-ignore
+                    // @ts-ignore - Use EXACT same viewport for perfect alignment
                     const textLayer = new pdfjs.TextLayer({
                         textContentSource: textContent,
                         container: textLayerDiv,
-                        viewport: viewport,
+                        viewport: viewport, // Must be the SAME viewport object used for canvas
                     });
                     await textLayer.render();
 
+                    // ========== POST-RENDER CLEANUP FOR PRECISE ALIGNMENT ==========
+                    // Force explicit pixel dimensions AFTER render to prevent width collapse
+                    textLayerDiv.style.setProperty('width', `${viewport.width}px`, 'important');
+                    textLayerDiv.style.setProperty('height', `${viewport.height}px`, 'important');
+
+                    // Force reset container positioning only - DO NOT touch transforms
+                    // PDF.js uses scaleX transforms on spans for proper text width matching
+                    textLayerDiv.style.setProperty('left', '0', 'important');
+                    textLayerDiv.style.setProperty('top', '0', 'important');
+                    textLayerDiv.style.setProperty('margin', '0', 'important');
+                    textLayerDiv.style.setProperty('padding', '0', 'important');
+                    // ================================================================
                     const spans = textLayerDiv.querySelectorAll('span');
                     spans.forEach((span, idx) => {
                         const spanId = `p${pageNum}-s${idx}`;
@@ -199,10 +240,11 @@ export const PDFViewer: React.FC<PDFViewerProps> = ({ tabId, path, onSelection }
         const handleMouseUp = () => {
             if (isEditMode) return;
             const selection = window.getSelection();
-            if (selection && selection.toString().trim().length > 0) {
+            const selectedText = selection?.toString().trim() || '';
+            if (selection && selectedText.length > 0) {
                 const range = selection.getRangeAt(0);
                 const rect = range.getBoundingClientRect();
-                onSelection(selection.toString().trim(), {
+                onSelection(selectedText, {
                     x: rect.left + rect.width / 2,
                     y: rect.top
                 });
